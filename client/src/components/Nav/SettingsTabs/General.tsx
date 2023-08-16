@@ -1,10 +1,12 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import { CheckIcon } from 'lucide-react';
-import { ThemeContext } from '~/hooks/ThemeContext';
+import { DialogButton } from '~/components/ui';
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { useClearConversationsMutation } from 'librechat-data-provider';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import store from '~/store';
+import { ThemeContext } from '~/hooks';
+import { cn } from '~/utils';
 import { localize } from '~/localization/Translation';
 
 export const ThemeSelector = ({
@@ -34,10 +36,12 @@ export const ThemeSelector = ({
 
 export const ClearChatsButton = ({
   confirmClear,
+  className = '',
   showText = true,
   onClick,
 }: {
   confirmClear: boolean;
+  className?: string;
   showText: boolean;
   onClick: () => void;
 }) => {
@@ -46,22 +50,40 @@ export const ClearChatsButton = ({
   return (
     <div className="flex items-center justify-between">
       {showText && <div>{localize(lang, 'com_nav_clear_all_chats')}</div>}
-      <button
-        className="btn relative bg-red-600  text-white hover:bg-red-800"
+      <DialogButton
+        id="clearConvosBtn"
+        onClick={onClick}
+        className={cn(
+          ' btn btn-danger relative border-none bg-red-700 text-white hover:bg-red-800 dark:hover:bg-red-800',
+          className,
+        )}
+      >
+        {/* <button
+        className="btn mt-2 inline-flex h-10 items-center justify-center rounded-md relative bg-red-600 text-white hover:bg-red-800"
         type="button"
         id="clearConvosBtn"
         onClick={onClick}
-      >
+      > */}
         {confirmClear ? (
-          <div className="flex w-full items-center justify-center gap-2" id="clearConvosTxt">
+          <div
+            className="flex w-full items-center justify-center gap-2"
+            id="clearConvosTxt"
+            data-testid="clear-convos-confirm"
+          >
             <CheckIcon className="h-5 w-5" /> {localize(lang, 'com_nav_confirm_clear')}
           </div>
         ) : (
-          <div className="flex w-full items-center justify-center gap-2" id="clearConvosTxt">
+          <div
+            className="flex w-full items-center justify-center gap-2"
+            id="clearConvosTxt"
+            data-testid="clear-convos-initial"
+          >
             {localize(lang, 'com_nav_clear')}
           </div>
         )}
-      </button>
+
+        {/* </button> */}
+      </DialogButton>
     </div>
   );
 };
@@ -85,9 +107,11 @@ export const LangSelector = ({
       >
         <option value="en">{localize(lang, 'com_nav_lang_english')}</option>
         <option value="cn">{localize(lang, 'com_nav_lang_chinese')}</option>
+        <option value="de">{localize(lang, 'com_nav_lang_german')}</option>
+        <option value="es">{localize(lang, 'com_nav_lang_spanish')}</option>
+        <option value="fr">{localize(lang, 'com_nav_lang_french')}</option>
         <option value="it">{localize(lang, 'com_nav_lang_italian')}</option>
         <option value="br">{localize(lang, 'com_nav_lang_brazilian_portuguese')}</option>
-        <option value="es">{localize(lang, 'com_nav_lang_spanish')}</option>
       </select>
     </div>
   );

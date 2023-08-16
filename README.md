@@ -48,7 +48,6 @@ Click on the thumbnail to open the video☝️
 ---
 
 ## ⚠️ [Breaking Changes](docs/general_info/breaking_changes.md) ⚠️
-**Applies to [v0.5.4](docs/general_info/breaking_changes.md#v054) & [v0.5.5](docs/general_info/breaking_changes.md#v055)**
 
 **Please read this before updating from a previous version**
 
@@ -109,6 +108,7 @@ Keep up with the latest updates by visiting the releases page - [Releases](https
   * [Cloudflare](docs/deployment/cloudflare.md)
   * [Ngrok](docs/deployment/ngrok.md)
   * [Render](docs/deployment/render.md)
+  * [Azure](docs/deployment/azure-terraform.md)
 </details>
 
 <details>
